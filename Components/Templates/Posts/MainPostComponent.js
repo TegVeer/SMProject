@@ -13,11 +13,11 @@ import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import CommentPostComponent from "./CommentPostComponent";
 const width = Dimensions.get("window").width * 0.95;
 const height = (width / 16) * 9;
-
+const widthMinimal = Dimensions.get("window").width * 0.9;
 export default function MainPostComponent(props) {
   const [liked, setLiked] = useState(true);
   const [bookmarked, setBookmarked] = useState(true);
-  const image = props.image;
+  const image = props.photos;
   const mentioned = props.mentioned;
   return (
     <View
@@ -148,14 +148,15 @@ export default function MainPostComponent(props) {
       {mentioned ? (
         <View
           style={{
-            width: "90%",
+            width: widthMinimal,
             borderColor: Colors.highlight,
             marginTop: 10,
             borderRadius: 20,
             borderWidth: 0.5,
+            overflow: "hidden",
           }}
         >
-          <CommentPostComponent minimal photos={[1, 2, 3, 4, 5]} />
+          <CommentPostComponent minimal photos={[1, 2, 3, 4]} />
         </View>
       ) : null}
       <View
