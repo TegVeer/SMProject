@@ -47,6 +47,8 @@ import ImageUpload from "./ImageUpload";
 import AddProfileDetails from "./Views/AddProfileDetails";
 import Settings from "./Views/Settings";
 import SamplePost from "./Components/Templates/SamplePost";
+import MainPostComponent from "./Components/Templates/Posts/MainPostComponent";
+import CommentPostComponent from "./Components/Templates/Posts/CommentPostComponent";
 
 const fetchFont = () => {
   return Fonts.loadAsync({
@@ -97,7 +99,12 @@ export default function App() {
       <Provider store={ReduxStore}>
         <StatusBar barStyle="dark-content" backgroundColor={Colors.white} />
         {/* <FirstNavigation /> */}
-        <SamplePost />
+        <ScrollView>
+          <MainPostComponent mentioned />
+          <CommentPostComponent photos={[1, 2, 3, 4, 5]} />
+          <CommentPostComponent photos={[1, 2, 3, 4, 5]} />
+          <CommentPostComponent photos={[1, 2, 3, 4, 5]} />
+        </ScrollView>
       </Provider>
     </Root>
   );
