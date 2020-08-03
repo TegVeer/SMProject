@@ -11,14 +11,63 @@ import Colors from "../../../Constants/Colors";
 import CircularImage from "../../CircularImage";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import CommentPostComponent from "./CommentPostComponent";
+import { serverUrl } from "../../../Constants/URL";
+import { useSelector } from "react-redux";
+
+/*
+  NOTE - Properties for the Component
+1. id: ID for perticular post type
+2. postImages: images Array for all the images of the post
+3. postText: text for the post
+4. likesList: Array of all the likes user's id
+5. commentsList: Arrya of all the comment posts
+6. sharesList: Array of all the users that has shared the post
+7. mentioned: ID for the mentioned Post
+*/
+
 const width = Dimensions.get("window").width * 0.95;
 const height = (width / 16) * 9;
 const widthMinimal = Dimensions.get("window").width * 0.9;
 export default function MainPostComponent(props) {
-  const [liked, setLiked] = useState(true);
-  const [bookmarked, setBookmarked] = useState(true);
-  const image = props.photos;
-  const mentioned = props.mentioned;
+  const [liked, setLiked] = useState(false);
+  const [bookmarked, setBookmarked] = useState(false);
+  const userId = useSelector((state) => state.auth.userId);
+  const [init, setInit] = useState(true);
+  // ANCHOR Properties Initialized
+  const [id, setId] = useState(props.id);
+  const [images, setImage] = useState(props.postImages);
+  const [text, setText] = useState(props.postText);
+  const [likes, setLikes] = useState(props.likesList);
+  const [comments, setComments] = useState(props.commentsList);
+  const [shares, setShares] = useState(props.sharesList);
+  const [mentioned, setMentioned] = useState(props.mentioned);
+  const [dark, setDark] = useState(props.dark);
+
+  if (likes.includes(userId) && init) {
+    setLiked(true);
+    setInit(false);
+  }
+  async function likePost() {
+    try {
+      const response = await fetch(`${serverUrl}/post/like`, {
+        method: "POST",
+        body: JSON.stringify({
+          postId: id,
+          userId,
+        }),
+      });
+      const result = await response.json();
+      setLikeNumber(result.response);
+      if (result.message === "Liked") {
+        setLiked(true);
+      } else if (result.message === "Disliked") {
+        setLiked(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <View
       style={{
@@ -60,59 +109,36 @@ export default function MainPostComponent(props) {
           <Ionicons name="md-arrow-dropdown" size={24} color="black" />
         </View>
       </View>
-      <View style={{ marginHorizontal: 20 }}>
-        <Text
+      {text ? (
+        <View
           style={{
-            color: Colors.black,
-            fontFamily: "Comfortaa",
-            lineHeight: 20,
-            fontSize: 15,
+            marginHorizontal: 20,
+            alignSelf: "stretch",
           }}
         >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur.
-        </Text>
-      </View>
+          <Text
+            style={{
+              color: Colors.black,
+              fontFamily: "Comfortaa",
+              lineHeight: 20,
+              fontSize: 15,
+            }}
+          >
+            {text}
+          </Text>
+        </View>
+      ) : null}
+
       {/* ANCHOR  Image Sections */}
-      {image ? (
-        // <ScrollView horizontal>
-        //   {image.map((item) => (
-        //     <View
-        //       style={{
-        //         borderRadius: 20,
-        //         overflow: "hidden",
-        //         width,
-        //         height,
-        //         marginTop: 15,
-        //       }}
-        //     >
-        //       <Image
-        //         style={{
-        //           flex: 1,
-        //           height: null,
-        //           width: null,
-        //           resizeMode: "cover",
-        //         }}
-        //         source={{
-        //           uri:
-        //             "https://hips.hearstapps.com/pop.h-cdn.co/assets/17/11/1489610446-milkyway.jpg",
-        //         }}
-        //       />
-        //     </View>
-        //   ))}
-        // </ScrollView>
+      {images ? (
         <ScrollView
-          style={{ marginVertical: 10 }}
+          style={{ marginTop: 10 }}
           contentContainerStyle={{ alignItems: "center" }}
           horizontal
           showsHorizontalScrollIndicator={false}
           pagingEnabled
         >
-          {image.map((item) => {
+          {images.map((item) => {
             return (
               <View
                 key={item.toString()}
@@ -134,8 +160,7 @@ export default function MainPostComponent(props) {
                     resizeMode: "cover",
                   }}
                   source={{
-                    uri:
-                      "https://images.unsplash.com/photo-1542281286-9e0a16bb7366?ixlib=rb-1.2.1&w=1000&q=80",
+                    uri: item,
                   }}
                 />
               </View>
@@ -148,7 +173,6 @@ export default function MainPostComponent(props) {
       {mentioned ? (
         <View
           style={{
-            width: widthMinimal,
             borderColor: Colors.highlight,
             marginTop: 10,
             borderRadius: 20,
@@ -156,14 +180,44 @@ export default function MainPostComponent(props) {
             overflow: "hidden",
           }}
         >
-          <CommentPostComponent minimal photos={[1, 2, 3, 4]} />
+          <View
+            style={{
+              width: widthMinimal,
+            }}
+          >
+            <CommentPostComponent
+              minimal
+              photos={[
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+              ]}
+            />
+          </View>
         </View>
       ) : null}
       <View
         style={{
           width: "100%",
           flexDirection: "row",
-          paddingHorizontal: 1,
+          paddingHorizontal: 10,
         }}
       >
         <View
@@ -179,10 +233,11 @@ export default function MainPostComponent(props) {
             onPress={() => {
               setLiked(!liked);
             }}
+            onPress={likePost}
           >
             <Ionicons
               name="ios-heart"
-              size={24}
+              size={20}
               color={liked ? Colors.red : Colors.postLightGrey}
             />
           </TouchableOpacity>
@@ -190,11 +245,11 @@ export default function MainPostComponent(props) {
           <Text
             style={{
               color: liked ? Colors.red : Colors.postLightGrey,
-              fontSize: 12,
+              fontSize: 11,
               fontFamily: "Comfortaa_bold",
             }}
           >
-            105K
+            {likes.length == 0 ? "" : `${likes.length}`}
           </Text>
         </View>
         <View
@@ -211,7 +266,7 @@ export default function MainPostComponent(props) {
           >
             <MaterialIcons
               name="chat-bubble"
-              size={24}
+              size={20}
               color={Colors.postLightGrey}
             />
           </TouchableOpacity>
@@ -219,11 +274,11 @@ export default function MainPostComponent(props) {
           <Text
             style={{
               color: Colors.postLightGrey,
-              fontSize: 12,
+              fontSize: 11,
               fontFamily: "Comfortaa_bold",
             }}
           >
-            523
+            {comments.length == 0 ? "" : `${comments.length}`}
           </Text>
         </View>
         <View
@@ -240,7 +295,7 @@ export default function MainPostComponent(props) {
           >
             <Ionicons
               name="ios-share-alt"
-              size={24}
+              size={20}
               color={Colors.postLightGrey}
             />
           </TouchableOpacity>
@@ -248,11 +303,11 @@ export default function MainPostComponent(props) {
           <Text
             style={{
               color: Colors.postLightGrey,
-              fontSize: 12,
+              fontSize: 11,
               fontFamily: "Comfortaa_bold",
             }}
           >
-            83
+            {shares.length == 0 ? "" : `${shares.length}`}
           </Text>
         </View>
         <View
@@ -271,7 +326,7 @@ export default function MainPostComponent(props) {
           >
             <Ionicons
               name="md-bookmark"
-              size={24}
+              size={20}
               color={bookmarked ? "#0080FF" : Colors.postLightGrey}
             />
           </TouchableOpacity>

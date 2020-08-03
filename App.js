@@ -49,6 +49,7 @@ import Settings from "./Views/Settings";
 import SamplePost from "./Components/Templates/SamplePost";
 import MainPostComponent from "./Components/Templates/Posts/MainPostComponent";
 import CommentPostComponent from "./Components/Templates/Posts/CommentPostComponent";
+import TalkPost from "./Components/Templates/TalkPost";
 
 const fetchFont = () => {
   return Fonts.loadAsync({
@@ -98,11 +99,17 @@ export default function App() {
     <Root>
       <Provider store={ReduxStore}>
         <StatusBar barStyle="dark-content" backgroundColor={Colors.white} />
-        {/* <FirstNavigation /> */}
-        <ScrollView>
-          <MainPostComponent mentioned />
+        <FirstNavigation />
+        {/* <ScrollView>
+          <MainPostComponent
+            postText="Super Slick"
+            mentioned
+            likesList={[1, 2, 3]}
+            commentsList={[]}
+            sharesList={[]}
+          />
           <CommentPostComponent mentioned photos={[1, 2, 3]} />
-        </ScrollView>
+        </ScrollView> */}
       </Provider>
     </Root>
   );

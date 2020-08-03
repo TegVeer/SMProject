@@ -13,7 +13,7 @@ import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 
 const width = Dimensions.get("screen").width;
 const height = (width / 16) * 9;
-const widthSmall = width * 0.95;
+const widthSmall = width * 0.8;
 const heightSmall = (widthSmall / 16) * 9;
 const widthMinimal = width * 0.9;
 const heightMinimal = (widthMinimal / 16) * 9;
@@ -23,6 +23,7 @@ export default function CommentPostComponent(props) {
   const [bookmarked, setBookmarked] = useState(true);
   const minimal = props.minimal;
   const image = props.photos;
+  const data = props.data;
 
   return (
     <View>
@@ -90,18 +91,19 @@ export default function CommentPostComponent(props) {
                 style={
                   minimal
                     ? {
-                        width: widthMinimal - 1,
+                        width: widthMinimal,
                         height: heightMinimal,
                         overflow: "hidden",
                       }
                     : {
-                        marginHorizontal: width * 0.025,
+                        marginHorizontal: width * 0.1,
                         width: widthSmall,
                         height: heightSmall,
                         borderRadius: 20,
                         overflow: "hidden",
                         borderColor: Colors.highlight,
                         borderWidth: 1,
+                        marginBottom: 10,
                       }
                 }
               >

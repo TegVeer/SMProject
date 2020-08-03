@@ -15,6 +15,7 @@ import CircularImage from "../Components/CircularImage";
 import { Ionicons } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
 import { serverUrl } from "../Constants/URL";
+import MainPostComponent from "../Components/Templates/Posts/MainPostComponent";
 
 const Home = (props) => {
   const gender = useSelector((state) => state.auth.gender);
@@ -117,12 +118,20 @@ const Home = (props) => {
         }}
         keyExtractor={(item) => item._id.toString()}
         renderItem={({ item }) => (
-          <TalkPost
-            postMedia={item.postMedia}
+          // <TalkPost
+          //   postMedia={item.postMedia}
+          //   postText={item.postText}
+          //   likes={item.likes}
+          //   shares={item.shares}
+          //   comments={item.comments}
+          //   id={item._id}
+          // />
+          <MainPostComponent
+            postImages={item.postMedia}
             postText={item.postText}
-            likes={item.likes}
-            shares={item.shares}
-            comments={item.comments}
+            likesList={item.likes}
+            sharesList={item.shares}
+            commentsList={item.comments}
             id={item._id}
           />
         )}
