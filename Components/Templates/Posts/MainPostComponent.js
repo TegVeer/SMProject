@@ -23,6 +23,7 @@ import { useSelector } from "react-redux";
 5. commentsList: Arrya of all the comment posts
 6. sharesList: Array of all the users that has shared the post
 7. mentioned: ID for the mentioned Post
+8. userData: Data of the user that posted
 */
 
 const width = Dimensions.get("window").width * 0.95;
@@ -41,6 +42,7 @@ export default function MainPostComponent(props) {
   const [comments, setComments] = useState(props.commentsList);
   const [shares, setShares] = useState(props.sharesList);
   const [mentioned, setMentioned] = useState(props.mentioned);
+  const [userData, setUserData] = useState(props.userData);
   const [dark, setDark] = useState(props.dark);
 
   if (likes.includes(userId) && init) {
@@ -57,7 +59,8 @@ export default function MainPostComponent(props) {
         }),
       });
       const result = await response.json();
-      setLikeNumber(result.response);
+      console.log(result);
+      setLikes(result.response);
       if (result.message === "Liked") {
         setLiked(true);
       } else if (result.message === "Disliked") {
@@ -73,40 +76,40 @@ export default function MainPostComponent(props) {
       style={{
         width: "100%",
         alignItems: "center",
-        borderBottomColor: Colors.highlight,
-        borderBottomWidth: 0.5,
+        backgroundColor: dark ? Colors.black : Colors.white,
       }}
     >
       <View
         style={{ width: "100%", flexDirection: "row", alignItems: "center" }}
       >
         <View style={{ padding: 10 }}>
-          <CircularImage
-            uri="https://cdn.shopify.com/s/files/1/1594/4815/articles/DSLR_astrophotography_intro_1024x1024.jpg?v=1575073582"
-            componentSize={50}
-          />
+          <CircularImage uri={userData.profileImage} componentSize={50} />
         </View>
         <View style={{ flex: 1 }}>
           <Text
             style={{
-              color: Colors.black,
+              color: dark ? Colors.white : Colors.black,
               fontFamily: "Comfortaa_bold",
               fontSize: 17,
             }}
           >
-            User Name
+            {userData.name}
           </Text>
           <Text
             style={{
-              color: Colors.greyText,
+              color: dark ? Colors.darkGrey : Colors.greyText,
               fontFamily: "Comfortaa",
             }}
           >
-            @user_name
+            {userData.userName}
           </Text>
         </View>
         <View style={{ paddingRight: 20, paddingVertical: 10 }}>
-          <Ionicons name="md-arrow-dropdown" size={24} color="black" />
+          <Ionicons
+            name="md-arrow-dropdown"
+            size={24}
+            color={Colors.postLightGrey}
+          />
         </View>
       </View>
       {text ? (
@@ -118,7 +121,7 @@ export default function MainPostComponent(props) {
         >
           <Text
             style={{
-              color: Colors.black,
+              color: dark ? Colors.white : Colors.black,
               fontFamily: "Comfortaa",
               lineHeight: 20,
               fontSize: 15,
@@ -148,7 +151,7 @@ export default function MainPostComponent(props) {
                   height,
                   borderRadius: 20,
                   overflow: "hidden",
-                  borderColor: Colors.highlight,
+                  borderColor: dark ? Colors.darkContrast : Colors.light,
                   borderWidth: 1,
                 }}
               >
@@ -185,31 +188,7 @@ export default function MainPostComponent(props) {
               width: widthMinimal,
             }}
           >
-            <CommentPostComponent
-              minimal
-              photos={[
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                15,
-                16,
-                17,
-                18,
-                19,
-                20,
-              ]}
-            />
+            <CommentPostComponent minimal photos={[1, 2, 3]} />
           </View>
         </View>
       ) : null}

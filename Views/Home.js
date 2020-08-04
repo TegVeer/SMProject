@@ -17,12 +17,18 @@ import { useSelector } from "react-redux";
 import { serverUrl } from "../Constants/URL";
 import MainPostComponent from "../Components/Templates/Posts/MainPostComponent";
 
+async function fetchData() {
+  const response = await fetch(`${serverUrl}/post`);
+  const result = response.json();
+  return result;
+}
+
 const Home = (props) => {
   const gender = useSelector((state) => state.auth.gender);
   const profileImage = useSelector((state) => state.auth.profileImage);
   const [postList, setPostList] = useState([]);
   const [refreshing, setrefreshing] = useState(false);
-
+  const dark = true;
   if (postList.length === 0) {
     fetchData()
       .then((result) => {
@@ -53,7 +59,7 @@ const Home = (props) => {
       style={{
         flex: 1,
         alignItems: "center",
-        backgroundColor: Colors.white,
+        backgroundColor: dark ? Colors.black : Colors.white,
       }}
     >
       <View
@@ -61,8 +67,7 @@ const Home = (props) => {
           flexDirection: "row",
           width: "100%",
           alignItems: "center",
-          borderBottomWidth: 1,
-          borderBottomColor: Colors.lightBorder,
+          backgroundColor: dark ? Colors.darkContrast : Colors.lightBorder,
         }}
       >
         <View
@@ -82,7 +87,11 @@ const Home = (props) => {
           />
         </View>
         <View style={{ flex: 1, alignItems: "center" }}>
-          <Text style={{ fontSize: 18 }}>Home</Text>
+          <Text
+            style={{ fontSize: 18, color: dark ? Colors.white : Colors.black }}
+          >
+            Home
+          </Text>
         </View>
         <View
           style={{
@@ -96,7 +105,11 @@ const Home = (props) => {
           <TouchableOpacity
             onPress={() => props.navigation.navigate("AddPost")}
           >
-            <Ionicons name="md-add" size={24} color="black" />
+            <Ionicons
+              name="md-add"
+              size={24}
+              color={dark ? Colors.white : Colors.black}
+            />
           </TouchableOpacity>
         </View>
       </View>
@@ -110,7 +123,9 @@ const Home = (props) => {
             <View
               style={{
                 width: "100%",
-                borderBottomColor: Colors.lightBorderLine,
+                borderBottomColor: dark
+                  ? Colors.darkContrast
+                  : Colors.lightBorder,
                 borderBottomWidth: 0.5,
               }}
             ></View>
@@ -118,21 +133,15 @@ const Home = (props) => {
         }}
         keyExtractor={(item) => item._id.toString()}
         renderItem={({ item }) => (
-          // <TalkPost
-          //   postMedia={item.postMedia}
-          //   postText={item.postText}
-          //   likes={item.likes}
-          //   shares={item.shares}
-          //   comments={item.comments}
-          //   id={item._id}
-          // />
           <MainPostComponent
             postImages={item.postMedia}
             postText={item.postText}
             likesList={item.likes}
             sharesList={item.shares}
+            userData={item.userId}
             commentsList={item.comments}
             id={item._id}
+            dark={dark}
           />
         )}
       />
@@ -141,9 +150,3 @@ const Home = (props) => {
 };
 
 export default Home;
-
-async function fetchData() {
-  const response = await fetch(`${serverUrl}/post`);
-  const result = response.json();
-  return result;
-}

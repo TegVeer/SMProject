@@ -98,7 +98,10 @@ export default function App() {
   return (
     <Root>
       <Provider store={ReduxStore}>
-        <StatusBar barStyle="dark-content" backgroundColor={Colors.white} />
+        <StatusBar
+          barStyle="dark-content"
+          backgroundColor={Colors.lightBorder}
+        />
         <FirstNavigation />
         {/* <ScrollView>
           <MainPostComponent
