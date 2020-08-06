@@ -1,5 +1,11 @@
 import React from "react";
-import { View, Text, ScrollView, StatusBar } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  StatusBar,
+  TouchableOpacity,
+} from "react-native";
 import Colors from "../Constants/Colors";
 import Header from "../Components/Designs/Header";
 import { serverUrl } from "../Constants/URL";
@@ -11,26 +17,28 @@ function SettingListItem(props) {
   const dark = props.dark;
 
   return (
-    <View
-      style={{
-        width: "100%",
-        paddingVertical: 15,
-        paddingHorizontal: 20,
-        borderColor: dark ? Colors.darkContrast : Colors.light,
-        borderTopWidth: topLine ? 1 : 0,
-        borderBottomWidth: bottomLine ? 1 : 0,
-      }}
-    >
-      <Text
+    <TouchableOpacity onPress={props.onPress}>
+      <View
         style={{
-          color: dark ? Colors.white : Colors.black,
-          fontSize: 15,
-          fontFamily: "Comfortaa_bold",
+          width: "100%",
+          paddingVertical: 15,
+          paddingHorizontal: 20,
+          borderColor: dark ? Colors.darkContrast : Colors.light,
+          borderTopWidth: topLine ? 1 : 0,
+          borderBottomWidth: bottomLine ? 1 : 0,
         }}
       >
-        {itemName}
-      </Text>
-    </View>
+        <Text
+          style={{
+            color: dark ? Colors.white : Colors.black,
+            fontSize: 15,
+            fontFamily: "Comfortaa_bold",
+          }}
+        >
+          {itemName}
+        </Text>
+      </View>
+    </TouchableOpacity>
   );
 }
 
@@ -89,7 +97,11 @@ export default function Settings(props) {
         <Divider dark={dark ? true : false} name="Misc" />
         <SettingListItem dark={dark ? true : false} bottom name="Explore" />
         <SettingListItem dark={dark ? true : false} bottom name="Themes" />
-        <SettingListItem dark={dark ? true : false} name="Ads & Promotions" />
+        <SettingListItem
+          dark={dark ? true : false}
+          name="Ads & Promotions"
+          onPress={() => props.navigation.navigate("CreateCampaign")}
+        />
         <Divider dark={dark ? true : false} name="Archives" />
         <SettingListItem dark={dark ? true : false} bottom name="Records" />
         <SettingListItem dark={dark ? true : false} name="History" />

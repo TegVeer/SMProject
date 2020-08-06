@@ -28,6 +28,7 @@ import Trending from "../Views/Trending";
 import Updates from "../Views/Updates";
 import Saved from "../Views/Saved";
 import LikedPost from "../Views/LikedPost";
+import CreateCampaign from "../Views/CreateCampaign";
 
 const HomeTabNavigator = createMaterialBottomTabNavigator(
   {
@@ -89,30 +90,34 @@ const DrawerNavigator = createDrawerNavigator(
 
 const FirstNavigator = createStackNavigator(
   {
-    Splash: { screen: Splash, navigationOptions: { headerShown: false } },
-    SignIn: { screen: SignIn, navigationOptions: { headerShown: false } },
-    CreateAccount: {
-      screen: CreateAccount,
-      navigationOptions: { headerShown: false },
-    },
-    CreateNewPassword: {
-      screen: CreateNewPassword,
-      navigationOptions: { headerShown: false },
-    },
-    ResetPassword: {
-      screen: ResetPassword,
-      navigationOptions: { headerShown: false },
-    },
-    SetupProfile: {
-      screen: SetupProfile,
-      navigationOptions: { headerShown: false },
-    },
-    TermsConditions: {
-      screen: TermsConditions,
-      navigationOptions: { headerShown: false },
-    },
-    VerifyCode: {
-      screen: VerifyCode,
+    // Splash: { screen: Splash, navigationOptions: { headerShown: false } },
+    // SignIn: { screen: SignIn, navigationOptions: { headerShown: false } },
+    // CreateAccount: {
+    //   screen: CreateAccount,
+    //   navigationOptions: { headerShown: false },
+    // },
+    // CreateNewPassword: {
+    //   screen: CreateNewPassword,
+    //   navigationOptions: { headerShown: false },
+    // },
+    // ResetPassword: {
+    //   screen: ResetPassword,
+    //   navigationOptions: { headerShown: false },
+    // },
+    // SetupProfile: {
+    //   screen: SetupProfile,
+    //   navigationOptions: { headerShown: false },
+    // },
+    // TermsConditions: {
+    //   screen: TermsConditions,
+    //   navigationOptions: { headerShown: false },
+    // },
+    // VerifyCode: {
+    //   screen: VerifyCode,
+    //   navigationOptions: { headerShown: false },
+    // },
+    CreateCampaign: {
+      screen: CreateCampaign,
       navigationOptions: { headerShown: false },
     },
     Home: {

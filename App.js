@@ -98,11 +98,11 @@ export default function App() {
     <Root>
       <Provider store={ReduxStore}>
         <StatusBar barStyle="dark-content" backgroundColor={Colors.white} />
-        {/* <FirstNavigation /> */}
-        <ScrollView>
+        <FirstNavigation />
+        {/* <ScrollView>
           <MainPostComponent mentioned />
           <CommentPostComponent mentioned photos={[1, 2, 3]} />
-        </ScrollView>
+        </ScrollView> */}
       </Provider>
     </Root>
   );

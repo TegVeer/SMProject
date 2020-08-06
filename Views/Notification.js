@@ -2,7 +2,7 @@
 // import { StyleSheet, Text, View, ScrollView } from "react-native";
 import Header from "../Components/Designs/Header";
 // import NotificationComponent from "../Components/Templates/NotificationComponent";
-// import Colors from "../Constants/Colors";
+import Colors from "../Constants/Colors";
 // import { serverUrl } from "../Constants/URL";
 
 // const Notification = () => {
@@ -41,8 +41,8 @@ import { StyleSheet, Text, View, Dimensions, Image } from "react-native";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 
 const { width, height } = Dimensions.get("window");
-
-export default function App() {
+const dark = true;
+export default function App(props) {
   return (
     <View style={styles.container}>
       <Header title="Notifications" />
@@ -62,9 +62,9 @@ export default function App() {
             />
             <View style={styles.textView}>
               <Text>
-                <Text style={{ fontWeight: "bold" }}>Barack </Text>
-                <Text>liked your post. </Text>
-                <Text style={{ color: "grey" }}>2 h</Text>
+                <Text style={styles.textBoldColor}>Barack </Text>
+                <Text style={styles.textColor}>liked your post. </Text>
+                <Text style={styles.timeColor}>2 h</Text>
               </Text>
             </View>
             <View style={styles.image}>
@@ -90,9 +90,9 @@ export default function App() {
             />
             <View style={styles.textView}>
               <Text>
-                <Text style={{ fontWeight: "bold" }}>Barack </Text>
-                <Text>commented on your post. </Text>
-                <Text style={{ color: "grey" }}>1 h</Text>
+                <Text style={styles.textBoldColor}>Barack </Text>
+                <Text style={styles.textColor}>commented on your post. </Text>
+                <Text style={styles.timeColor}>1 h</Text>
               </Text>
             </View>
             <View style={styles.image}>
@@ -115,9 +115,9 @@ export default function App() {
             />
             <View style={{ marginHorizontal: "5%", width: "62%" }}>
               <Text>
-                <Text style={{ fontWeight: "bold" }}>Barack </Text>
-                <Text>started following you. </Text>
-                <Text style={{ color: "grey" }}>3 h</Text>
+                <Text style={styles.textBoldColor}>Barack </Text>
+                <Text style={styles.textColor}>started following you. </Text>
+                <Text style={styles.timeColor}>3 h</Text>
               </Text>
             </View>
             <TouchableOpacity style={styles.button}>
@@ -149,11 +149,11 @@ export default function App() {
 
             <View style={styles.textView}>
               <Text>
-                <Text style={{ fontWeight: "bold" }}>Barack </Text>
-                <Text>and </Text>
-                <Text style={{ fontWeight: "bold" }}>Obama </Text>
-                <Text>liked your post. </Text>
-                <Text style={{ color: "grey" }}>2 h</Text>
+                <Text style={styles.textBoldColor}>Barack </Text>
+                <Text style={styles.textColor}>and </Text>
+                <Text style={styles.textBoldColor}>Obama </Text>
+                <Text style={styles.textColor}>liked your post. </Text>
+                <Text style={styles.timeColor}>2 h</Text>
               </Text>
             </View>
             <View style={styles.image}>
@@ -190,13 +190,13 @@ export default function App() {
             </View>
             <View style={styles.textView}>
               <Text>
-                <Text style={{ fontWeight: "bold" }}>Barack</Text>
-                <Text>, </Text>
-                <Text style={{ fontWeight: "bold" }}>Obama </Text>
-                <Text>and </Text>
-                <Text style={{ fontWeight: "bold" }}>35 others </Text>
-                <Text>liked your post. </Text>
-                <Text style={{ color: "grey" }}>2 h</Text>
+                <Text style={styles.textBoldColor}>Barack</Text>
+                <Text style={styles.textColor}>, </Text>
+                <Text style={styles.textBoldColor}>Obama </Text>
+                <Text style={styles.textColor}>and </Text>
+                <Text style={styles.textBoldColor}>35 others </Text>
+                <Text style={styles.textColor}>liked your post. </Text>
+                <Text style={styles.timeColor}>2 h</Text>
               </Text>
             </View>
             <View style={styles.image}>
@@ -222,12 +222,18 @@ export default function App() {
             />
             <View style={{ marginHorizontal: "5%", width: "56%" }}>
               <Text>
-                <Text style={{ fontWeight: "bold" }}>Modi </Text>
-                <Text>started following you. </Text>
-                <Text style={{ color: "grey" }}>3 h</Text>
+                <Text style={styles.textBoldColor}>Modi </Text>
+                <Text style={styles.textColor}>started following you. </Text>
+                <Text style={styles.timeColor}>3 h</Text>
               </Text>
             </View>
-            <TouchableOpacity style={{ borderRadius: 5, borderWidth: 1 }}>
+            <TouchableOpacity
+              style={{
+                borderRadius: 5,
+                borderWidth: 1,
+                borderColor: dark ? Colors.white : Colors.black,
+              }}
+            >
               <Text
                 style={{
                   textAlign: "center",
@@ -235,6 +241,7 @@ export default function App() {
                   fontWeight: "bold",
                   marginHorizontal: "3%",
                   marginVertical: "5%",
+                  color: dark ? Colors.white : Colors.black,
                 }}
               >
                 Following
@@ -251,9 +258,9 @@ export default function App() {
             />
             <View style={styles.textView}>
               <Text>
-                <Text style={{ fontWeight: "bold" }}>Barack </Text>
-                <Text>shared your post. </Text>
-                <Text style={{ color: "grey" }}>2 h</Text>
+                <Text style={styles.textBoldColor}>Barack </Text>
+                <Text style={styles.textColor}>shared your post. </Text>
+                <Text style={styles.timeColor}>2 h</Text>
               </Text>
             </View>
             <View style={styles.image}>
@@ -293,13 +300,13 @@ export default function App() {
             </View>
             <View style={styles.textView}>
               <Text>
-                <Text style={{ fontWeight: "bold" }}>Barack</Text>
-                <Text>, </Text>
-                <Text style={{ fontWeight: "bold" }}>Obama </Text>
-                <Text>and </Text>
-                <Text style={{ fontWeight: "bold" }}>35 others </Text>
-                <Text>started following you. </Text>
-                <Text style={{ color: "grey" }}>2 h</Text>
+                <Text style={styles.textBoldColor}>Barack</Text>
+                <Text style={styles.textColor}>, </Text>
+                <Text style={styles.textBoldColor}>Obama </Text>
+                <Text style={styles.textColor}>and </Text>
+                <Text style={styles.textBoldColor}>35 others </Text>
+                <Text style={styles.textColor}>started following you. </Text>
+                <Text style={styles.timeColor}>2w</Text>
               </Text>
             </View>
           </View>
@@ -314,12 +321,13 @@ const styles = StyleSheet.create({
     // height: height,
     // width: width,
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: dark ? Colors.black : Colors.white,
   },
   innerContainer: {
     marginHorizontal: "5%",
   },
   heading: {
+    color: dark ? Colors.white : Colors.black,
     fontSize: 20,
     fontWeight: "bold",
     marginTop: "10%",
@@ -353,6 +361,14 @@ const styles = StyleSheet.create({
   textView: {
     marginHorizontal: "5%",
     width: "68%",
+  },
+  textColor: { color: dark ? Colors.greyText : Colors.black },
+  textBoldColor: {
+    color: dark ? Colors.white : Colors.black,
+    fontWeight: "bold",
+  },
+  timeColor: {
+    color: dark ? Colors.postLightGrey : Colors.black,
   },
   button: {
     borderRadius: 5,
