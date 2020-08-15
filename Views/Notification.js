@@ -42,7 +42,8 @@ import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 
 const { width, height } = Dimensions.get("window");
 
-export default function App() {
+export default function Notification() {
+  const dark = true;
   return (
     <View style={styles.container}>
       <Header title="Notifications" />

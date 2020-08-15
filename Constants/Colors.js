@@ -18,4 +18,7 @@ export default {
   red: "#ff0000",
   likedBlue: "#0080FF",
   darkContrast: "#1a1a1a",
+  lightContrast: "#6d6d6d",
+  pigionBlue: "#7285a5",
+  powderBlue: "#b0d5e5",
 };

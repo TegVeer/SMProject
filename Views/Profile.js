@@ -17,7 +17,7 @@ import CircularImage from "../Components/CircularImage";
 import { Ionicons } from "@expo/vector-icons";
 import Header from "../Components/Designs/Header";
 import { useSelector } from "react-redux";
-import TalkPost from "../Components/Templates/TalkPost";
+import MainPostComponent from "../Components/Templates/Posts/MainPostComponent";
 import { serverUrl } from "../Constants/URL";
 
 const width = Dimensions.get("window").width;
@@ -410,13 +410,23 @@ export default function Profile(props) {
             {postList.map((item, index) => {
               return (
                 <View key={item._id}>
-                  <TalkPost
+                  {/* <TalkPost
                     postMedia={item.postMedia}
                     postText={item.postText}
                     likes={item.likes}
                     shares={item.shares}
                     comments={item.comments}
                     id={item._id}
+                  /> */}
+
+                  <MainPostComponent
+                    postImages={item.postMedia}
+                    postText={item.postText}
+                    likesList={item.likes}
+                    sharesList={item.shares}
+                    commentsList={item.comments}
+                    id={item.id}
+                    userData={item.userId}
                   />
                   {index < postList.length - 1 ? (
                     <View
@@ -450,13 +460,22 @@ export default function Profile(props) {
             {likedList.map((item, index) => {
               return (
                 <View key={item._id}>
-                  <TalkPost
+                  {/* <TalkPost
                     postMedia={item.postMedia}
                     postText={item.postText}
                     likes={item.likes}
                     shares={item.shares}
                     comments={item.comments}
                     id={item._id}
+                  /> */}
+                  <MainPostComponent
+                    postImages={item.postMedia}
+                    postText={item.postText}
+                    likesList={item.likes}
+                    sharesList={item.shares}
+                    commentsList={item.comments}
+                    id={item.id}
+                    userData={item.userId}
                   />
                   {index < postList.length - 1 ? (
                     <View

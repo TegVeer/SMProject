@@ -31,7 +31,7 @@ const Header = (props) => {
           <Ionicons
             name="ios-arrow-back"
             size={23}
-            color={dark ? Colors.white : Colors.lightBlack}
+            color={dark ? Colors.white : Colors.darkContrast}
           />
         </TouchableOpacity>
       ) : (
@@ -41,7 +41,7 @@ const Header = (props) => {
       <View style={styles.headerName}>
         <Text
           style={{
-            color: dark ? Colors.white : Colors.lightBlack,
+            color: dark ? Colors.white : Colors.darkContrast,
             fontSize: 15,
             fontFamily: "Comfortaa_bold",
           }}
@@ -54,7 +54,7 @@ const Header = (props) => {
           <Ionicons
             name={iconName}
             size={23}
-            color={dark ? Colors.white : Colors.lightBlack}
+            color={dark ? Colors.white : Colors.darkContrast}
           />
         </TouchableOpacity>
       ) : (

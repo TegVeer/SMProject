@@ -10,7 +10,6 @@ import {
 } from "react-native";
 import { Toast } from "native-base";
 import Colors from "../Constants/Colors";
-import TalkPost from "../Components/Templates/TalkPost";
 import CircularImage from "../Components/CircularImage";
 import { Ionicons } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
@@ -28,7 +27,7 @@ const Home = (props) => {
   const profileImage = useSelector((state) => state.auth.profileImage);
   const [postList, setPostList] = useState([]);
   const [refreshing, setrefreshing] = useState(false);
-  const dark = true;
+  const dark = false;
   if (postList.length === 0) {
     fetchData()
       .then((result) => {

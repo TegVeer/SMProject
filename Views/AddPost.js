@@ -35,6 +35,9 @@ const AddPost = (props) => {
   const [postImageInfo, setPostImageInfo] = useState([]);
   const [postText, setPostText] = useState("");
   const [signal, setSignal] = useState(false);
+  const [dark, setDark] = useState(false);
+  const [stats, setStats] = useState(false);
+  const [mentioned, setMentioned] = useState(false);
 
   // const [galleryImages, setgalleryImages] = useState([]);
   // const [loaded, setLoaded] = useState(false);
@@ -317,7 +320,7 @@ const AddPost = (props) => {
   return (
     <View
       style={{
-        backgroundColor: Colors.white,
+        backgroundColor: dark ? Colors.black : Colors.white,
         flex: 1,
         alignItems: "center",
         justifyContent: "space-between",
@@ -328,6 +331,8 @@ const AddPost = (props) => {
           backEnable
           onPress={() => props.navigation.goBack()}
           iconEnable
+          dark={dark}
+          title="New Post"
           iconName="md-checkmark"
           onIconPress={uploadPost}
         />
@@ -341,11 +346,15 @@ const AddPost = (props) => {
             padding: 10,
             fontSize: 15,
             maxHeight: 200,
-            borderColor: Colors.lightBorder,
+            borderColor: dark ? Colors.lightContrast : Colors.lightBorder,
             borderRadius: 10,
             borderWidth: 1,
+            color: dark ? Colors.white : Colors.black,
           }}
           placeholder="Enter Message"
+          placeholderTextColor={
+            dark ? Colors.lightContrast : Colors.lgihtBorder
+          }
           multiline
           autoFocus
           onChangeText={(text) => setPostText(text)}
@@ -373,23 +382,51 @@ const AddPost = (props) => {
           style={{
             flexDirection: "row",
             width: "100%",
-            paddingVertical: 10,
+            paddingVertical: 5,
             justifyContent: "space-evenly",
-            borderTopColor: Colors.lightBorder,
+            borderTopColor: dark ? Colors.lightContrast : Colors.lightBorder,
             borderTopWidth: 0.75,
           }}
         >
-          <TouchableOpacity onPress={test}>
-            <Ionicons name="ios-camera" size={24} color={Colors.lightBlack} />
+          <TouchableOpacity
+            style={{ padding: 5, borderRadius: 50 }}
+            onPress={test}
+          >
+            <Ionicons
+              name="ios-camera"
+              size={20}
+              color={dark ? Colors.white : Colors.darkContrast}
+            />
           </TouchableOpacity>
-          <TouchableOpacity onPress={imageSelector}>
-            <Ionicons name="ios-images" size={24} color={Colors.lightBlack} />
+          <TouchableOpacity
+            style={{ padding: 5, borderRadius: 50 }}
+            onPress={imageSelector}
+          >
+            <Ionicons
+              name="ios-images"
+              size={20}
+              color={dark ? Colors.white : Colors.darkContrast}
+            />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => console.log(postImageInfo)}>
-            <Ionicons name="ios-videocam" size={24} color={Colors.lightBlack} />
+          <TouchableOpacity
+            style={{ padding: 5, borderRadius: 50 }}
+            onPress={() => console.log(postImageInfo)}
+          >
+            <Ionicons
+              name="ios-stats"
+              size={20}
+              color={dark ? Colors.white : Colors.darkContrast}
+            />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => console.log(postImages)}>
-            <MaterialIcons name="gif" size={30} color={Colors.lightBlack} />
+          <TouchableOpacity
+            style={{ padding: 5, borderRadius: 50 }}
+            onPress={() => console.log(postImages)}
+          >
+            <Ionicons
+              name="md-map"
+              size={20}
+              color={dark ? Colors.white : Colors.darkContrast}
+            />
           </TouchableOpacity>
         </View>
       </View>

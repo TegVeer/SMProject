@@ -11,8 +11,8 @@ import {
 import CircularImage from "../CircularImage";
 import Colors from "../../Constants/Colors";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
-import TalkPost from "../Templates/TalkPost";
-
+// import TalkPost from "../Templates/TalkPost";
+import MainPostComponent from "./Posts/MainPostComponent";
 const width = Dimensions.get("window").width * 0.95;
 const height = (width / 16) * 9;
 
@@ -21,12 +21,19 @@ export default function SamplePost() {
     <View style={{ alignItems: "center", flex: 1 }}>
       <StatusBar />
 
-      <TalkPost
+      {/* <TalkPost
         postMedia={["https://wallpaperaccess.com/full/1143632.jpg"]}
         postText="Sample Text for this beautifull Scenery"
         likes={[]}
         shares={[]}
         comments={[]}
+      /> */}
+      <MainPostComponent
+        postImages={["https://wallpaperaccess.com/full/1143632.jpg"]}
+        postText="Sample Text for this beautifull Scenery"
+        likesList={[]}
+        commentsList={[]}
+        sharesList={[]}
       />
       <PostComponent mentioned />
     </View>

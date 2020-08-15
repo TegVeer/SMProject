@@ -49,7 +49,8 @@ import Settings from "./Views/Settings";
 import SamplePost from "./Components/Templates/SamplePost";
 import MainPostComponent from "./Components/Templates/Posts/MainPostComponent";
 import CommentPostComponent from "./Components/Templates/Posts/CommentPostComponent";
-import TalkPost from "./Components/Templates/TalkPost";
+import PollingGraph from "./Components/Animated/PollingGraph";
+import CreatePoll from "./Components/Animated/CreatePoll";
 
 const fetchFont = () => {
   return Fonts.loadAsync({
@@ -88,7 +89,7 @@ const ReduxStore = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 export default function App() {
   const [fontLoaded, setFontLoaded] = useState(false);
-
+  const dark = false;
   if (!fontLoaded) {
     return (
       <AppLoading startAsync={fetchFont} onFinish={() => setFontLoaded(true)} />
@@ -99,20 +100,11 @@ export default function App() {
     <Root>
       <Provider store={ReduxStore}>
         <StatusBar
-          barStyle="dark-content"
-          backgroundColor={Colors.lightBorder}
+          barStyle={dark ? "light-content" : "dark-content"}
+          backgroundColor={dark ? Colors.darkContrast : Colors.lightBorder}
         />
-        <FirstNavigation />
-        {/* <ScrollView>
-          <MainPostComponent
-            postText="Super Slick"
-            mentioned
-            likesList={[1, 2, 3]}
-            commentsList={[]}
-            sharesList={[]}
-          />
-          <CommentPostComponent mentioned photos={[1, 2, 3]} />
-        </ScrollView> */}
+        {/* <FirstNavigation /> */}
+        <CreatePoll />
       </Provider>
     </Root>
   );
